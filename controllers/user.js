@@ -1,5 +1,5 @@
 /**
- * We can interact with mongoose in three diffirent ways:
+ * We can interact with mongoose in three different ways:
  * [v] Callback
  * [v] Promises
  * [v] Async/await (Promises)
@@ -74,6 +74,18 @@ const replaceUser = async (req, res, next) => {
     return res.status(200).json({success: true})
 }
 
+const secret = async (req, res, next) => {
+    console.log('called secret success');
+}
+
+const signIn = async (req, res, next) => {
+    console.log('called signIn success');
+}
+
+const signUp = async (req, res, next) => {
+    console.log('called signUp success');
+}
+
 const updateUser = async (req, res, next) => {
     // number of fields
     const { userID } = req.value.params
@@ -91,6 +103,9 @@ module.exports = {
     index,
     newUser,
     newUserDeck,
+    secret, 
+    signIn,
+    signUp,
     replaceUser,
     updateUser
 }
