@@ -15,9 +15,21 @@ const UserSchema = new Schema({
         unique: true,
         lowercase: true,
     },
+    authGoogleID: {
+        type: String,
+        default: null,
+    },
+    authFacebookID: {
+        type: String,
+        default: null,
+    },
     password: {
         type:String,
-        required: true,
+    },
+    authType: {
+        type: String,
+        enum: ['local', 'google', 'facebook'],
+        default: 'local'
     },
     decks: [{
         type: Schema.Types.ObjectId,
@@ -27,6 +39,8 @@ const UserSchema = new Schema({
 
 UserSchema.pre('save', async function(next) {
     try {
+
+        if(this.authType !== 'local') next()
         // generate a salt
         const salt = await bcrypt.genSalt(10)
         // generate a password hash (salt + hash)

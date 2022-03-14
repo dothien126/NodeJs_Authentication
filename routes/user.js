@@ -18,6 +18,8 @@ router
     .get(UserController.index)
     .post(validateBody(schemas.userSchema), UserController.newUser);
 
+router.route('auth/google').post(passport.authenticate('google-plus-token'), UserController.authGoogle)
+
 router
     .route("/signup")
     .post(validateBody(schemas.authSignUpSchema), UserController.signUp);
